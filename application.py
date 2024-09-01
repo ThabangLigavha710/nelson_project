@@ -27,3 +27,7 @@ def extract():
     return extracted_data
 
 extract()
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
