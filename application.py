@@ -1,33 +1,28 @@
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 application = app
+
 
 @app.route("/")
 def index():
     return "Hello World!"
 
-@app.route("/data")
-def data():
-    return {"data": "example"}
-
 @app.route("/data", methods=["POST"])
 def extract():
 
-    output = []
+    output = []   
 
-    extract_data = data()['data']
+    extract_data = {"data": request.json["data"]}
 
-    for i in extract_data:
+    for i in extract_data["data"]:
         output.append(i)
 
     output.sort()
 
     extracted_data = {"word": output}
+
     return extracted_data
-
-extract()
-
 
 if __name__ == "__main__":
     app.run(debug=True)
